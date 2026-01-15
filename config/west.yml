@@ -6,14 +6,14 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: Good-Great-Grand-Wonderful
       url-base: https://github.com/Good-Great-Grand-Wonderful
-    - name: lanyagagaga-droid
-      url-base: https://github.com/lanyagagaga-droid
+    - name: johncattrall
+      url-base: https://github.com/johncattrall
   projects:
     - name: zmk
       remote: zmkfirmware
       import: app/west.yml
     - name: gggw-zmk-keebs
-      remote: lanyagagaga-droid
+      remote: johncattrall
       revision: main
       import: config/west.yml
   self:
