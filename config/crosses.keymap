@@ -103,9 +103,9 @@
 
         layer_1 {
             bindings = <
-&as NUMBER_1  &as NUMBER_2  &as NUMBER_3   &as NUMBER_4  &as NUMBER_5  &as NUMBER_6    &as N7            &as N8         &as NUMBER_9     &as NUMBER_0
-&kp ESCAPE    &trans        &trans         &trans        &trans        &kp LEFT_ARROW  &kp DOWN_ARROW    &kp UP_ARROW   &kp RIGHT_ARROW  &kp SEMICOLON
-&as GRAVE     &kp LCTRL     &kp LEFT_ALT   &kp CAPS      &kp TAB       &as MINUS       &kp LEFT_BRACKET  &as SEMICOLON  &as SQT          &kp BACKSLASH
+&as NUMBER_1  &as NUMBER_2  &as NUMBER_3   &as NUMBER_4  &as NUMBER_5  &as NUMBER_6    &as N7            &as N8             &as NUMBER_9     &as NUMBER_0
+&kp ESCAPE    &trans        &trans         &trans        &trans        &kp LEFT_ARROW  &kp DOWN_ARROW    &kp UP_ARROW       &kp RIGHT_ARROW  &as SEMICOLON
+&as GRAVE     &kp LCTRL     &kp LEFT_ALT   &kp CAPS      &kp TAB       &as MINUS       &as LEFT_BRACKET  &kp RIGHT_BRACKET  &as SQT          &as BACKSLASH
                             &kp BACKSPACE  &to 0         &kp SPACE     &kp ENTER       &to 2             &kp SPACE
             >;
         };
