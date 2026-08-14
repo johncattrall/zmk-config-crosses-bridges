@@ -81,6 +81,11 @@
             bindings = <&shifted ENTER>;
             key-positions = <32 33>;
         };
+
+        alt-tab {
+            bindings = <&kp LA(TAB)>;
+            key-positions = <31 10>;
+        };
     };
 
     macros {
