@@ -44,7 +44,7 @@
     spi-max-frequency = <2000000>;
     irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
     automouse-layer = <4>;
-    cpi = <400>;
+    cpi = <800>;
     xy-swap;
     // x-invert;
     // y-invert;
