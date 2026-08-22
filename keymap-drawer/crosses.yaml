@@ -72,7 +72,7 @@ layers:
   - W
   - Z
   - t: ''''
-    s: '"'
+    s: _
   - '&as F'
   - O
   - U
@@ -105,11 +105,11 @@ layers:
   - t: .
     s: '>'
   - t: '-'
-    s: _
+    s: '"'
   - t: /
-    s: '?'
-  - t: ','
     s: <
+  - t: ','
+    s: '?'
   - BSPC
   - t: ▽
     type: trans
