@@ -226,11 +226,23 @@
 
     precision_pointer {
         layers = <4>;
-        input-processors = <&zip_xy_scaler 3 4>;
+        // scaler slows the pointer; temp_layer refreshes the Mouse layer
+        // timeout so left-ball motion keeps the layer alive too
+        input-processors = <&zip_xy_scaler 3 4>, <&zip_temp_layer 4 800>;
     };
 
     scroller {
         layers = <0 1 2 3 5>;
         input-processors = <&zip_xy_to_scroll_mapper>, <&zip_scroll_snap>, <&zip_scroll_scaler 1 2>;
     };
+};
+
+/* Mouse layer keys must not dismiss the temp layer: exclude the click,
+ * mod-click and shortcut positions so you can click while the layer is
+ * held open by ball motion. Position 32 (&to 0) stays excluded from this
+ * list on purpose: it is the explicit exit.
+ */
+&zip_temp_layer {
+    require-prior-idle-ms = <150>;
+    excluded-positions = <0 2 3 5 6 9 10 12 13 14 15 16 17 18>;
 };
