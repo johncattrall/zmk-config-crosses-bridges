@@ -1,7 +1,10 @@
-layout: {zmk_keyboard: crosses, layout_name: gggw_crosses_36_layout}
+layout:
+  zmk_keyboard: crosses
+  layout_name: gggw_crosses_36_layout
 layers:
   Base:
-  - {t: Q, h: System}
+  - t: Q
+    h: System
   - W
   - E
   - R
@@ -12,14 +15,22 @@ layers:
   - O
   - P
   - A
-  - {t: S, h: ⌃}
-  - {t: D, h: ⌥}
-  - {t: F, h: ⌘}
-  - {t: G, h: ⇧}
-  - {t: H, h: ⇧}
-  - {t: J, h: ⌘}
-  - {t: K, h: ⌥}
-  - {t: L, h: ⌃}
+  - t: S
+    h: ⌃
+  - t: D
+    h: ⌥
+  - t: F
+    h: ⌘
+  - t: G
+    h: ⇧
+  - t: H
+    h: ⇧
+  - t: J
+    h: ⌘
+  - t: K
+    h: ⌥
+  - t: L
+    h: ⌃
   - Bksp
   - Z
   - X
@@ -28,52 +39,95 @@ layers:
   - B
   - N
   - M
-  - {t: ',', s: <}
-  - {t: ., s: '>'}
-  - {t: /, s: '?'}
+  - t: ','
+    s: <
+  - t: .
+    s: '>'
+  - t: /
+    s: '?'
   - Esc
-  - {t: '''', s: '"'}
-  - {t: Space, h: F5}
-  - {t: Enter, h: ⌥}
-  - {t: NumWord, s: 2x Lock}
-  - {t: TAB, h: ⇧}
+  - t: ''''
+    s: '"'
+  - t: Space
+    h: F5
+  - t: Enter
+    h: ⌥
+  - t: NumWord
+    s: 2x Lock
+  - t: TAB
+    h: ⇧
+  - &id001
+    t: Scroll
+    h: v+h, snap
+    type: trackball
+  - &id002
+    t: Pointer
+    h: auto Mouse
+    type: trackball
   Nav/Num:
-  - {t: '1', s: '!'}
-  - {t: '2', s: '@'}
-  - {t: '3', s: '#'}
-  - {t: '4', s: $}
-  - {t: '5', s: '%'}
-  - {t: '6', s: ^}
-  - {t: '7', s: '&'}
-  - {t: '8', s: '*'}
-  - {t: '9', s: (}
-  - {t: '0', s: )}
+  - t: '1'
+    s: '!'
+  - t: '2'
+    s: '@'
+  - t: '3'
+    s: '#'
+  - t: '4'
+    s: $
+  - t: '5'
+    s: '%'
+  - t: '6'
+    s: ^
+  - t: '7'
+    s: '&'
+  - t: '8'
+    s: '*'
+  - t: '9'
+    s: (
+  - t: '0'
+    s: )
   - Esc
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - ←
   - ↓
   - ↑
   - →
-  - {t: ;, s: ':'}
-  - {t: '`', s: '~'}
+  - t: ;
+    s: ':'
+  - t: '`'
+    s: '~'
   - ⌃
   - ⌥
   - Caps
-  - {t: TAB, type: held}
-  - {t: '-', s: _}
-  - {t: '[', s: '{'}
-  - {t: ']', s: '}'}
-  - {t: '''', s: '"'}
-  - {t: \, s: '|'}
+  - t: TAB
+    type: held
+  - t: '-'
+    s: _
+  - t: '['
+    s: '{'
+  - t: ']'
+    s: '}'
+  - t: ''''
+    s: '"'
+  - t: \
+    s: '|'
   - Bksp
-  - {t: Base, h: toggle}
-  - {t: Space, type: held}
+  - t: Base
+    h: toggle
+  - t: Space
+    type: held
   - Enter
-  - {t: Media/Win, h: toggle}
+  - t: Media/Win
+    h: toggle
   - Space
+  - *id001
+  - *id002
   Media/Win:
   - Mute
   - ''
@@ -98,7 +152,8 @@ layers:
   - Vol-
   - ←
   - ↓
-  - {t: →, type: held}
+  - t: →
+    type: held
   - PgDn
   - '='
   - ']'
@@ -106,13 +161,16 @@ layers:
   - Sft+AltGr+Ctl+L
   - /
   - ''
-  - {t: Base, h: toggle}
-  - {type: held}
+  - t: Base
+    h: toggle
+  - type: held
   - ⇧⌥ Spc
   - ⇧⌥ Ent
   - Space
+  - *id001
+  - *id002
   System:
-  - {type: held}
+  - type: held
   - Studio unlock
   - ''
   - ''
@@ -128,10 +186,14 @@ layers:
   - ''
   - ''
   - BT CLR
-  - {t: BT, h: '0'}
-  - {t: BT, h: '1'}
-  - {t: BT, h: '2'}
-  - {t: BT, h: '3'}
+  - t: BT
+    h: '0'
+  - t: BT
+    h: '1'
+  - t: BT
+    h: '2'
+  - t: BT
+    h: '3'
   - ''
   - ''
   - ''
@@ -148,6 +210,8 @@ layers:
   - ''
   - ''
   - Space
+  - *id001
+  - *id002
   Mouse:
   - Gui+TAB
   - ''
@@ -174,29 +238,47 @@ layers:
   - ''
   - ''
   - ''
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - ''
-  - {t: ▽, type: trans}
+  - t: ▽
+    type: trans
   - ''
   - ''
-  - {t: ▽, type: trans}
-  - {t: Base, h: toggle}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - t: ▽
+    type: trans
+  - t: Base
+    h: toggle
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - ''
+  - t: Precision
+    h: 0.75x pointer
+    type: trackball
+  - t: Pointer
+    type: trackball
   NumPad:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - ','
   - '7'
   - '8'
   - '9'
   - Bksp
-  - {t: ▽, type: trans}
+  - t: ▽
+    type: trans
   - +
   - '-'
   - '*'
@@ -206,32 +288,57 @@ layers:
   - '5'
   - '6'
   - Enter
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - .
   - '1'
   - '2'
   - '3'
   - '='
   - Sft+AltGr+Ctl+T
-  - {t: Base, h: toggle}
-  - {t: ▽, type: trans}
+  - t: Base
+    h: toggle
+  - t: ▽
+    type: trans
   - Sft+Alt+Enter
   - Sft+Alt+M
   - Meh+Space
+  - t: Throw ⇄
+    h: Swap ⇅
+    type: trackball
+  - t: Resize ⇄
+    h: Focus ⇅
+    type: trackball
 combos:
-- p: [24, 32]
+- p:
+  - 24
+  - 32
   k: Nav/Num
-- p: [23, 32]
+- p:
+  - 23
+  - 32
   k: Media/Win
-- p: [25, 33]
+- p:
+  - 25
+  - 33
   k: Nav/Num
-- p: [26, 33]
+- p:
+  - 26
+  - 33
   k: Media/Win
-- p: [32, 33]
+- p:
+  - 32
+  - 33
   k: ⇧ Enter
-- p: [31, 10]
+- p:
+  - 31
+  - 10
   k: Alt+TAB

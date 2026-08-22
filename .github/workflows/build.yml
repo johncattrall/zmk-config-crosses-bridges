@@ -20,18 +20,36 @@ jobs:
         run: |
           mkdir -p keymap-drawer
           keymap -c keymap_drawer.config.yaml parse -z config/crosses.keymap > keymap-drawer/crosses.yaml
-          keymap -c keymap_drawer.config.yaml draw keymap-drawer/crosses.yaml -j config/info.json > keymap-drawer/crosses.svg
           python3 -c "import yaml" 2>/dev/null || pip install --quiet pyyaml
           python3 <<'PY'
-          import glob, re, subprocess, yaml
-          layers = list(yaml.safe_load(open('keymap-drawer/crosses.yaml'))['layers'])
-          for layer in layers:
-              slug = re.sub(r'[^a-z0-9]+', '-', layer.lower()).strip('-')
-              with open(f'keymap-drawer/crosses_{slug}.svg', 'w') as out:
+          import glob, json, re, subprocess, yaml
+
+          # physical layout plus two trackball positions
+          info = json.load(open('config/info.json'))
+          layout = info['layouts']['gggw_crosses_36_layout']['layout']
+          layout.append({"row": 4, "col": 0, "x": 5.02, "y": 2.25, "w": 1.4, "h": 1.4})
+          layout.append({"row": 4, "col": 1, "x": 6.70, "y": 2.25, "w": 1.4, "h": 1.4})
+          json.dump(info, open('keymap-drawer/layout.json', 'w'), indent=1)
+
+          # append per-layer trackball labels (keymap-drawer/trackballs.yaml)
+          balls = yaml.safe_load(open('keymap-drawer/trackballs.yaml'))
+          km = yaml.safe_load(open('keymap-drawer/crosses.yaml'))
+          for name, keys in km['layers'].items():
+              keys.extend(balls.get(name, balls['default']))
+          yaml.safe_dump(km, open('keymap-drawer/crosses.yaml', 'w'),
+                         allow_unicode=True, sort_keys=False)
+
+          def draw(args, out_path):
+              with open(out_path, 'w') as out:
                   subprocess.run(['keymap', '-c', 'keymap_drawer.config.yaml', 'draw',
-                                  'keymap-drawer/crosses.yaml', '-j', 'config/info.json',
-                                  '-s', layer], stdout=out, check=True)
+                                  'keymap-drawer/crosses.yaml', '-j', 'keymap-drawer/layout.json']
+                                 + args, stdout=out, check=True)
+
+          for layer in km['layers']:
+              slug = re.sub(r'[^a-z0-9]+', '-', layer.lower()).strip('-')
+              draw(['-s', layer], f'keymap-drawer/crosses_{slug}.svg')
               print('drew', layer)
+          draw([], 'keymap-drawer/crosses.svg')
           # double the declared dimensions: GitHub clamps images to the content
           # column via max-width, so oversizing makes them render at full width
           pat = re.compile(r'^<svg width="([0-9.]+)" height="([0-9.]+)"')

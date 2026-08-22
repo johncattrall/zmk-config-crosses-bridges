@@ -146,6 +146,19 @@ path.combo {
 .trans.tap, .ghost.tap {
   opacity: 0.4;
 }
+rect.trackball {
+  rx: 34px;
+  ry: 34px;
+  fill: #b3202c;
+  stroke: #7e161f;
+}
+rect.trackball.side {
+  fill: #7e161f;
+  stroke: #5c1017;
+}
+text.trackball {
+  fill: #ffffff;
+}
 </style>
 <g transform="translate(30, 0)" class="layer-Mouse">
 <text x="0" y="28" class="label" id="Mouse">Mouse</text>
@@ -327,6 +340,17 @@ path.combo {
 <g transform="translate(560, 236)" class="key keypos-35">
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key side"/>
 <rect rx="4" ry="4" x="-20" y="-24" width="40" height="40" class="key"/>
+</g>
+<g transform="translate(320, 165)" class="key trackball keypos-36">
+<rect rx="6" ry="6" x="-37" y="-37" width="74" height="74" class="key trackball side"/>
+<rect rx="4" ry="4" x="-31" y="-35" width="62" height="62" class="key trackball"/>
+<text x="0" y="-4" class="key trackball tap"><tspan style="font-size: 78%">Precision</tspan></text>
+<text x="0" y="35" class="key trackball hold"><tspan style="font-size: 64%">0.75x poin…</tspan></text>
+</g>
+<g transform="translate(414, 165)" class="key trackball keypos-37">
+<rect rx="6" ry="6" x="-37" y="-37" width="74" height="74" class="key trackball side"/>
+<rect rx="4" ry="4" x="-31" y="-35" width="62" height="62" class="key trackball"/>
+<text x="0" y="-4" class="key trackball tap">Pointer</text>
 </g>
 <g class="combo combopos-0">
 <rect rx="6" ry="6" x="252" y="186" width="28" height="26" class="combo"/>

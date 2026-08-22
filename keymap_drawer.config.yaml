@@ -124,3 +124,16 @@ draw_config:
     .trans.tap, .ghost.tap {
       opacity: 0.4;
     }
+    rect.trackball {
+      rx: 34px;
+      ry: 34px;
+      fill: #b3202c;
+      stroke: #7e161f;
+    }
+    rect.trackball.side {
+      fill: #7e161f;
+      stroke: #5c1017;
+    }
+    text.trackball {
+      fill: #ffffff;
+    }
