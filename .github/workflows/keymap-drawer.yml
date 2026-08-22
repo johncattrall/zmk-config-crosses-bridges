@@ -10,13 +10,37 @@ on:
 
 jobs:
   draw:
-    uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-    with:
-      commit_message: "[Draw] ${{ github.event.head_commit.message }}"
-      keymap_patterns: "config/crosses.keymap"
-      config_path: "keymap_drawer.config.yaml"
-      output_folder: "keymap-drawer"
-      parse_args: ""
-      draw_args: "crosses:'-j config/info.json'"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install keymap-drawer
+        run: pipx install keymap-drawer
+
+      - name: Draw combined and per-layer SVGs
+        run: |
+          mkdir -p keymap-drawer
+          keymap -c keymap_drawer.config.yaml parse -z config/crosses.keymap > keymap-drawer/crosses.yaml
+          keymap -c keymap_drawer.config.yaml draw keymap-drawer/crosses.yaml -j config/info.json > keymap-drawer/crosses.svg
+          python3 -c "import yaml" 2>/dev/null || pip install --quiet pyyaml
+          python3 <<'PY'
+          import re, subprocess, yaml
+          layers = list(yaml.safe_load(open('keymap-drawer/crosses.yaml'))['layers'])
+          for layer in layers:
+              slug = re.sub(r'[^a-z0-9]+', '-', layer.lower()).strip('-')
+              with open(f'keymap-drawer/crosses_{slug}.svg', 'w') as out:
+                  subprocess.run(['keymap', '-c', 'keymap_drawer.config.yaml', 'draw',
+                                  'keymap-drawer/crosses.yaml', '-j', 'config/info.json',
+                                  '-s', layer], stdout=out, check=True)
+              print('drew', layer)
+          PY
+
+      - name: Commit rendered keymaps
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add keymap-drawer
+          git diff --cached --quiet || git commit -m "[Draw] keymap render [skip ci]"
+          git push

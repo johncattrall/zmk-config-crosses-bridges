@@ -68,25 +68,25 @@ text.footer {
 }
 
 /* styling for combo tap, and key non-tap label text */
-text.combo, text.hold, text.shifted, text.left, text.right, text.tl, text.tr, text.bl, text.br {
+text.combo, text.hold, text.shifted, text.left, text.right {
     font-size: 11px;
 }
 
-text.hold, text.bl, text.br {
+text.hold {
     text-anchor: middle;
     dominant-baseline: auto;
 }
 
-text.shifted, text.tl, text.tr {
+text.shifted {
     text-anchor: middle;
     dominant-baseline: hanging;
 }
 
-text.left, text.tl, text.bl {
+text.left {
     text-anchor: start;
 }
 
-text.right, text.tr, text.br {
+text.right {
     text-anchor: end;
 }
 
@@ -124,29 +124,24 @@ path.combo {
 }
 /* End Tabler Icons Cleanup */
 
+@media (prefers-color-scheme: dark) {
+svg.keymap { fill: #d1d6db; }
+rect.key { fill: #3f4750; }
+rect.key, rect.combo { stroke: #60666c; }
+rect.combo, rect.combo-separate { fill: #1f3d7a; }
+rect.held, rect.combo.held { fill: #854747; }
+text.label, text.footer { stroke: black; }
+text.trans { fill: #7e8184; }
+path.combo { stroke: #7f7f7f; }
+
+}
 svg.keymap {
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 11px;
-  background-color: #ffffff;
-}
-text.label {
-  stroke: #dfdfde;
-  stroke-width: 12;
-  stroke-linejoin: round;
-  font-weight: bold;
-}
-rect.combo, rect.combo-separate {
-  opacity: 0.95;
-  stroke: #c9cccf;
-  stroke-width: 0.5;
-  fill: #d7eaed;
 }
 path.combo {
   stroke-dasharray: 4, 4;
   stroke-opacity: 0.3;
-}
-rect.held, rect.combo.held {
-  fill: #ebdada;
 }
 .trans.tap, .ghost.tap {
   opacity: 0.4;
@@ -591,7 +586,7 @@ rect.held, rect.combo.held {
 <rect rx="6" ry="6" x="-26" y="-26" width="52" height="52" class="key side"/>
 <rect rx="4" ry="4" x="-20" y="-24" width="40" height="40" class="key"/>
 <text x="0" y="-4" class="key tap">
-<tspan x="0" dy="-0.9em">Media/</tspan><tspan x="0" dy="1.2em">Win</tspan>
+<tspan x="0" dy="-1.2em">Media/</tspan><tspan x="0" dy="1.2em">Win</tspan>
 </text>
 <text x="0" y="24" class="key hold">toggle</text>
 </g>

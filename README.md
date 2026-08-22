@@ -8,9 +8,31 @@ ZMK firmware configuration for a wireless [Crosses/Bridges](https://ergokeyboard
 
 ## Keymap
 
-![Keymap](keymap-drawer/crosses.svg)
+Rendered by [keymap-drawer](https://github.com/caksoylar/keymap-drawer); regenerated automatically by GitHub Actions on every keymap change. All layers in [a single image](keymap-drawer/crosses.svg).
 
-Rendered by [keymap-drawer](https://github.com/caksoylar/keymap-drawer); regenerated automatically by GitHub Actions on every keymap change.
+#### Base
+
+![Base layer](keymap-drawer/crosses_base.svg)
+
+#### Nav/Num
+
+![Nav/Num layer](keymap-drawer/crosses_nav-num.svg)
+
+#### Media/Win
+
+![Media/Win layer](keymap-drawer/crosses_media-win.svg)
+
+#### System
+
+![System layer](keymap-drawer/crosses_system.svg)
+
+#### Mouse
+
+![Mouse layer](keymap-drawer/crosses_mouse.svg)
+
+#### NumPad
+
+![NumPad layer](keymap-drawer/crosses_numpad.svg)
 
 ## Features
 

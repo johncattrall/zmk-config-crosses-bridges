@@ -108,32 +108,19 @@ parse_config:
 
 draw_config:
   append_colon_to_layer_header: false
+  # transparent background; auto dark mode flips text/key colors with the
+  # viewer's prefers-color-scheme so the SVGs stay readable on GitHub dark
+  dark_mode: auto
   draw_key_sides: true
   n_columns: 2
   svg_extra_style: |
     svg.keymap {
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
       font-size: 11px;
-      background-color: #ffffff;
-    }
-    text.label {
-      stroke: #dfdfde;
-      stroke-width: 12;
-      stroke-linejoin: round;
-      font-weight: bold;
-    }
-    rect.combo, rect.combo-separate {
-      opacity: 0.95;
-      stroke: #c9cccf;
-      stroke-width: 0.5;
-      fill: #d7eaed;
     }
     path.combo {
       stroke-dasharray: 4, 4;
       stroke-opacity: 0.3;
-    }
-    rect.held, rect.combo.held {
-      fill: #ebdada;
     }
     .trans.tap, .ghost.tap {
       opacity: 0.4;
