@@ -143,6 +143,7 @@
         compatible = "zmk,keymap";
 
         layer_0 {
+            display-name = "Base";
             bindings = <
 &lt 3 Q  &as W               &as E           &as R           &as T             &as Y               &as U            &as I               &as O                &as P
 &as A    &hml LEFT_CONTROL S  &hml LEFT_ALT D  &hml LEFT_GUI F  &hml LEFT_SHIFT G  &hmr RIGHT_SHIFT H   &hmr RIGHT_GUI J  &hmr RIGHT_ALT K     &hmr RIGHT_CONTROL L  &kp BACKSPACE
@@ -152,6 +153,7 @@
         };
 
         layer_1 {
+            display-name = "Nav/Num";
             bindings = <
 &as NUMBER_1  &as NUMBER_2  &as NUMBER_3   &as NUMBER_4  &as NUMBER_5  &as NUMBER_6    &as N7            &as N8             &as NUMBER_9     &as NUMBER_0
 &kp ESCAPE    &trans        &trans         &trans        &trans        &kp LEFT_ARROW  &kp DOWN_ARROW    &kp UP_ARROW       &kp RIGHT_ARROW  &as SEMICOLON
@@ -161,6 +163,7 @@
         };
 
         layer_2 {
+            display-name = "Media/Win";
             bindings = <
 &kp K_MUTE    &none           &none           &mkp RCLK        &mkp LCLK      &kp LC(LEFT)        &kp LC(RIGHT)       &kp RA(RS(RC(LEFT)))  &kp RS(RA(RC(RIGHT)))  &none
 &kp C_VOL_UP  &none           &kp UP_ARROW    &none            &kp PAGE_UP    &shifted LA(H)      &shifted LA(L)      &shifted LA(K)        &shifted LA(J)         &none
@@ -170,6 +173,7 @@
         };
 
         layer_3 {
+            display-name = "System";
             bindings = <
 &none  &studio_unlock  &none  &none  &none  &none       &none         &none         &none         &none
 &none  &none           &none  &none  &none  &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3
@@ -179,6 +183,7 @@
         };
 
         Mouse {
+            display-name = "Mouse";
             bindings = <
 &kp LG(TAB)  &none  &mkp MB4  &mkp MB5  &none                 &mkp MB1         &mkp MB2       &none          &none              &kp LS(LG(TAB))
 &kp ESC      &none  &mkp MB2  &mkp MB1  &kp LS(LG(NUMBER_4))  &kp RIGHT_SHIFT  &kp RIGHT_GUI  &kp RIGHT_ALT  &kp RIGHT_CONTROL  &none
@@ -192,6 +197,7 @@
             // Left half stays transparent except an operator cluster on the home row,
             // so left-hand letters fall through to base and end num_word naturally.
             // Index 5: num_word and td_num point here.
+            display-name = "NumPad";
             bindings = <
 &trans  &trans    &trans     &trans     &trans     &kp COMMA  &kp N7  &kp N8  &kp N9  &kp BACKSPACE
 &trans  &kp PLUS  &kp MINUS  &kp ASTRK  &kp FSLH   &kp N0     &kp N4  &kp N5  &kp N6  &kp ENTER

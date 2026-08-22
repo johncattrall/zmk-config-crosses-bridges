@@ -1,0 +1,237 @@
+layout: {zmk_keyboard: crosses, layout_name: gggw_crosses_36_layout}
+layers:
+  Base:
+  - {t: Q, h: System}
+  - W
+  - E
+  - R
+  - T
+  - Y
+  - U
+  - I
+  - O
+  - P
+  - A
+  - {t: S, h: ⌃}
+  - {t: D, h: ⌥}
+  - {t: F, h: ⌘}
+  - {t: G, h: ⇧}
+  - {t: H, h: ⇧}
+  - {t: J, h: ⌘}
+  - {t: K, h: ⌥}
+  - {t: L, h: ⌃}
+  - Bksp
+  - Z
+  - X
+  - C
+  - V
+  - B
+  - N
+  - M
+  - {t: ',', s: <}
+  - {t: ., s: '>'}
+  - {t: /, s: '?'}
+  - Esc
+  - {t: '''', s: '"'}
+  - {t: Space, h: F5}
+  - {t: Enter, h: ⌥}
+  - {t: NumWord, s: 2x Lock}
+  - {t: TAB, h: ⇧}
+  Nav/Num:
+  - {t: '1', s: '!'}
+  - {t: '2', s: '@'}
+  - {t: '3', s: '#'}
+  - {t: '4', s: $}
+  - {t: '5', s: '%'}
+  - {t: '6', s: ^}
+  - {t: '7', s: '&'}
+  - {t: '8', s: '*'}
+  - {t: '9', s: (}
+  - {t: '0', s: )}
+  - Esc
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ←
+  - ↓
+  - ↑
+  - →
+  - {t: ;, s: ':'}
+  - {t: '`', s: '~'}
+  - ⌃
+  - ⌥
+  - Caps
+  - {t: TAB, type: held}
+  - {t: '-', s: _}
+  - {t: '[', s: '{'}
+  - {t: ']', s: '}'}
+  - {t: '''', s: '"'}
+  - {t: \, s: '|'}
+  - Bksp
+  - {t: Base, h: toggle}
+  - {t: Space, type: held}
+  - Enter
+  - {t: Media/Win, h: toggle}
+  - Space
+  Media/Win:
+  - Mute
+  - ''
+  - ''
+  - R Click
+  - L Click
+  - Ctl+←
+  - Ctl+→
+  - AltGr+Sft+Ctl+←
+  - Sft+AltGr+Ctl+→
+  - ''
+  - Vol+
+  - ''
+  - ↑
+  - ''
+  - PgUp
+  - ⇧⌥ H
+  - ⇧⌥ L
+  - ⇧⌥ K
+  - ⇧⌥ J
+  - ''
+  - Vol-
+  - ←
+  - ↓
+  - {t: →, type: held}
+  - PgDn
+  - '='
+  - ']'
+  - Sft+AltGr+Ctl+H
+  - Sft+AltGr+Ctl+L
+  - /
+  - ''
+  - {t: Base, h: toggle}
+  - {type: held}
+  - ⇧⌥ Spc
+  - ⇧⌥ Ent
+  - Space
+  System:
+  - {type: held}
+  - Studio unlock
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - BT CLR
+  - {t: BT, h: '0'}
+  - {t: BT, h: '1'}
+  - {t: BT, h: '2'}
+  - {t: BT, h: '3'}
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - Space
+  Mouse:
+  - Gui+TAB
+  - ''
+  - Back
+  - Fwd
+  - ''
+  - L Click
+  - R Click
+  - ''
+  - ''
+  - Sft+Gui+TAB
+  - ESC
+  - ''
+  - R Click
+  - L Click
+  - Sft+Gui+4
+  - ⇧
+  - ⌘
+  - ⌥
+  - ⌃
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ''
+  - {t: ▽, type: trans}
+  - ''
+  - ''
+  - {t: ▽, type: trans}
+  - {t: Base, h: toggle}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ''
+  NumPad:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ','
+  - '7'
+  - '8'
+  - '9'
+  - Bksp
+  - {t: ▽, type: trans}
+  - +
+  - '-'
+  - '*'
+  - /
+  - '0'
+  - '4'
+  - '5'
+  - '6'
+  - Enter
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - .
+  - '1'
+  - '2'
+  - '3'
+  - '='
+  - {t: ▽, type: trans}
+  - {t: Base, h: toggle}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+combos:
+- p: [24, 32]
+  k: Nav/Num
+- p: [23, 32]
+  k: Media/Win
+- p: [25, 33]
+  k: Nav/Num
+- p: [26, 33]
+  k: Media/Win
+- p: [32, 33]
+  k: ⇧ Enter
+- p: [31, 10]
+  k: Alt+TAB
