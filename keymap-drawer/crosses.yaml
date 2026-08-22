@@ -216,12 +216,12 @@ layers:
   - '2'
   - '3'
   - '='
-  - {t: ▽, type: trans}
+  - Sft+AltGr+Ctl+T
   - {t: Base, h: toggle}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - Sft+Alt+Enter
+  - Sft+Alt+M
+  - Sft+Alt+Space
 combos:
 - p: [24, 32]
   k: Nav/Num
