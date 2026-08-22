@@ -217,6 +217,7 @@
  */
 / {
     input_processors {
+        // Left ball: one-shot placement flicks (slow repeat)
         zip_win_throw: zip_win_throw {
             compatible = "zmk,input-processor-keybind";
             #input-processor-cells = <0>;
@@ -230,17 +231,19 @@
                        <&kp RS(RA(RC(K)))>;       // flick up:    swap window clockwise
         };
 
-        zip_win_focus: zip_win_focus {
+        // Right ball: continuous layout control (fast repeat).
+        // Rolling right/left drags the main pane divider; up/down cycles focus.
+        zip_win_resize: zip_win_resize {
             compatible = "zmk,input-processor-keybind";
             #input-processor-cells = <0>;
             mode = <1>;
-            tick = <200>;
-            wait-ms = <250>;
-            tap-ms = <30>;
-            bindings = <&kp LC(RIGHT)>,           // flick right: go to space right
-                       <&kp LC(LEFT)>,            // flick left:  go to space left
-                       <&kp LS(LA(J))>,           // flick down:  focus next window
-                       <&kp LS(LA(K))>;           // flick up:    focus previous window
+            tick = <120>;
+            wait-ms = <80>;
+            tap-ms = <20>;
+            bindings = <&kp LS(LA(L))>,           // roll right: expand main pane
+                       <&kp LS(LA(H))>,           // roll left:  shrink main pane
+                       <&kp LS(LA(J))>,           // roll down:  focus next window
+                       <&kp LS(LA(K))>;           // roll up:    focus previous window
         };
     };
 };
@@ -285,12 +288,12 @@
     };
 };
 
-// NumPad layer: right ball moves focus between windows and spaces.
+// NumPad layer: right ball resizes the main pane and cycles focus.
 // The zero scaler stops residual motion from moving the pointer.
 &trackball_central_listener {
-    win_focus {
+    win_resize {
         layers = <5>;
-        input-processors = <&zip_win_focus>, <&zip_xy_scaler 0 1>;
+        input-processors = <&zip_win_resize>, <&zip_xy_scaler 0 1>;
     };
 };
 
@@ -310,5 +313,5 @@
  * (List replaces the module default, so the defaults are repeated.)
  */
 &num_word {
-    continue-list = <BACKSPACE DELETE DOT COMMA PLUS MINUS STAR FSLH EQUAL LEFT RIGHT J K>;
+    continue-list = <BACKSPACE DELETE DOT COMMA PLUS MINUS STAR FSLH EQUAL LEFT RIGHT H J K L>;
 };
