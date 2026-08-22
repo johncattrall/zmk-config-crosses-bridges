@@ -201,14 +201,14 @@
             // Thumbs (Amethyst): pos 30 toggle global tiling (mod2+T),
             // pos 33 swap focused window with main (mod1+Enter),
             // pos 34 focus main window (mod1+M, bind in Amethyst prefs),
-            // pos 35 cycle layout (Cmd+Opt+Shift+Space, custom Amethyst binding;
+            // pos 35 cycle layout (Shift+Ctrl+Opt+Space, custom Amethyst binding;
             // mod1+Space is taken by voice input). Plain Space/Enter still exit numword.
             display-name = "NumPad";
             bindings = <
 &trans  &trans    &trans     &trans     &trans     &kp COMMA  &kp N7  &kp N8  &kp N9  &kp BACKSPACE
 &trans  &kp PLUS  &kp MINUS  &kp ASTRK  &kp FSLH   &kp N0     &kp N4  &kp N5  &kp N6  &kp ENTER
 &trans  &trans    &trans     &trans     &trans     &kp DOT    &kp N1  &kp N2  &kp N3  &kp EQUAL
-                  &kp RS(RA(RC(T)))  &to 0  &trans     &kp LS(LA(ENTER))  &kp LS(LA(M))  &kp LG(LS(LA(SPACE)))
+                  &kp RS(RA(RC(T)))  &to 0  &trans     &kp LS(LA(ENTER))  &kp LS(LA(M))  &kp LS(LC(LA(SPACE)))
             >;
         };
     };
@@ -323,6 +323,6 @@
         BACKSPACE DELETE DOT COMMA PLUS MINUS STAR FSLH EQUAL
         RS(RA(RC(LEFT))) RS(RA(RC(RIGHT))) RS(RA(RC(J))) RS(RA(RC(K)))
         LS(LA(H)) LS(LA(J)) LS(LA(K)) LS(LA(L))
-        LS(LA(ENTER)) LS(LA(M)) LG(LS(LA(SPACE))) RS(RA(RC(T)))
+        LS(LA(ENTER)) LS(LA(M)) LS(LC(LA(SPACE))) RS(RA(RC(T)))
     >;
 };
