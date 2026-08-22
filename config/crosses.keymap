@@ -198,12 +198,16 @@
             // Left half stays transparent except an operator cluster on the home row,
             // so left-hand letters fall through to base and end num_word naturally.
             // Index 5: num_word and td_num point here.
+            // Thumbs (Amethyst): pos 30 toggle global tiling (mod2+T),
+            // pos 33 swap focused window with main (mod1+Enter),
+            // pos 34 focus main window (mod1+M, bind in Amethyst prefs),
+            // pos 35 cycle layout (mod1+Space). Plain Space/Enter still exit numword.
             display-name = "NumPad";
             bindings = <
 &trans  &trans    &trans     &trans     &trans     &kp COMMA  &kp N7  &kp N8  &kp N9  &kp BACKSPACE
 &trans  &kp PLUS  &kp MINUS  &kp ASTRK  &kp FSLH   &kp N0     &kp N4  &kp N5  &kp N6  &kp ENTER
 &trans  &trans    &trans     &trans     &trans     &kp DOT    &kp N1  &kp N2  &kp N3  &kp EQUAL
-                  &trans     &to 0      &trans     &trans     &trans  &trans
+                  &kp RS(RA(RC(T)))  &to 0  &trans     &kp LS(LA(ENTER))  &kp LS(LA(M))  &kp LS(LA(SPACE))
             >;
         };
     };
@@ -307,11 +311,17 @@
     excluded-positions = <0 2 3 5 6 9 10 12 13 14 15 16 17 18>;
 };
 
-/* Keep num_word alive through the window-management flicks: the flick
- * bindings emit LEFT/RIGHT/J/K keycodes, which must not end the smart
- * layer. Enter stays out of the list so pad Enter still exits numword.
+/* Keep num_word alive through window management. Continue-list entries
+ * match keycode PLUS modifiers (subset match), so the exact Amethyst
+ * chords are whitelisted while the plain keys keep their exit behavior:
+ * plain Space, plain Enter and letters all still end numword.
  * (List replaces the module default, so the defaults are repeated.)
  */
 &num_word {
-    continue-list = <BACKSPACE DELETE DOT COMMA PLUS MINUS STAR FSLH EQUAL LEFT RIGHT H J K L>;
+    continue-list = <
+        BACKSPACE DELETE DOT COMMA PLUS MINUS STAR FSLH EQUAL
+        RS(RA(RC(LEFT))) RS(RA(RC(RIGHT))) RS(RA(RC(J))) RS(RA(RC(K)))
+        LS(LA(H)) LS(LA(J)) LS(LA(K)) LS(LA(L))
+        LS(LA(ENTER)) LS(LA(M)) LS(LA(SPACE)) RS(RA(RC(T)))
+    >;
 };
