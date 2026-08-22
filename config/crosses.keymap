@@ -209,6 +209,42 @@
     };
 };
 
+/* Trackball window management (Amethyst) on the NumPad layer.
+ * Flick a ball to fire a discrete Amethyst command
+ * (zettaface/zmk-input-processor-keybind, mode 1 = 4-way).
+ * Binding order is fixed by the driver: right, left, down, up.
+ * mod1 = Opt+Shift, mod2 = Ctrl+Opt+Shift (Amethyst defaults).
+ */
+/ {
+    input_processors {
+        zip_win_throw: zip_win_throw {
+            compatible = "zmk,input-processor-keybind";
+            #input-processor-cells = <0>;
+            mode = <1>;
+            tick = <60>;
+            wait-ms = <250>;
+            tap-ms = <30>;
+            bindings = <&kp RS(RA(RC(RIGHT)))>,   // flick right: throw window to space right
+                       <&kp RS(RA(RC(LEFT)))>,    // flick left:  throw window to space left
+                       <&kp RS(RA(RC(J)))>,       // flick down:  swap window counterclockwise
+                       <&kp RS(RA(RC(K)))>;       // flick up:    swap window clockwise
+        };
+
+        zip_win_focus: zip_win_focus {
+            compatible = "zmk,input-processor-keybind";
+            #input-processor-cells = <0>;
+            mode = <1>;
+            tick = <200>;
+            wait-ms = <250>;
+            tap-ms = <30>;
+            bindings = <&kp LC(RIGHT)>,           // flick right: go to space right
+                       <&kp LC(LEFT)>,            // flick left:  go to space left
+                       <&kp LS(LA(J))>,           // flick down:  focus next window
+                       <&kp LS(LA(K))>;           // flick up:    focus previous window
+        };
+    };
+};
+
 /* Left trackball, per-layer behavior.
  * The peripheral now sends raw x/y (only BLE rate limiting on-half);
  * interpretation happens here on the central side so it can vary by layer:
@@ -232,8 +268,23 @@
     };
 
     scroller {
-        layers = <0 1 2 3 5>;
+        layers = <0 1 2 3>;
         input-processors = <&zip_xy_to_scroll_mapper>, <&zip_scroll_snap>, <&zip_scroll_scaler 1 2>;
+    };
+
+    // NumPad layer: left ball throws/swaps windows (Amethyst)
+    win_throw {
+        layers = <5>;
+        input-processors = <&zip_win_throw>, <&zip_xy_scaler 0 1>;
+    };
+};
+
+// NumPad layer: right ball moves focus between windows and spaces.
+// The zero scaler stops residual motion from moving the pointer.
+&trackball_central_listener {
+    win_focus {
+        layers = <5>;
+        input-processors = <&zip_win_focus>, <&zip_xy_scaler 0 1>;
     };
 };
 
@@ -245,4 +296,13 @@
 &zip_temp_layer {
     require-prior-idle-ms = <150>;
     excluded-positions = <0 2 3 5 6 9 10 12 13 14 15 16 17 18>;
+};
+
+/* Keep num_word alive through the window-management flicks: the flick
+ * bindings emit LEFT/RIGHT/J/K keycodes, which must not end the smart
+ * layer. Enter stays out of the list so pad Enter still exits numword.
+ * (List replaces the module default, so the defaults are repeated.)
+ */
+&num_word {
+    continue-list = <BACKSPACE DELETE DOT COMMA PLUS MINUS STAR FSLH EQUAL LEFT RIGHT J K>;
 };

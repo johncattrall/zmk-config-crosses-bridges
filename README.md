@@ -19,6 +19,7 @@ Rendered by [keymap-drawer](https://github.com/caksoylar/keymap-drawer); regener
 - **Smart numpad (numword)**: tap the right inner thumb and the right half becomes a physical-style numpad (789 / 456 / 123) that switches itself off after the number, via [zmk-auto-layer](https://github.com/urob/zmk-auto-layer). Double tap locks the pad for data entry, triple tap locks the Nav/Num layer.
 - **Dual trackballs**: right ball is the pointer (auto-activates the Mouse layer on movement). The left ball is layer-aware: scroll on every layer (vertical and horizontal, axis-snapped by [zmk-scroll-snap](https://github.com/kot149/zmk-scroll-snap)), precision pointer (0.75x) on the Mouse layer for fine placement.
 - **Mouse layer with mod-clicks**: clicks mirrored on both hands, home row mods stay live for Cmd-click, Shift-click and friends.
+- **Trackball window management** ([Amethyst](https://ianyh.com/amethyst/)): on the NumPad layer the balls become window controls via [zmk-input-processor-keybind](https://github.com/zettaface/zmk-input-processor-keybind). Left-ball flicks throw the focused window to the space left/right or swap it through the stack; right-ball flicks move between spaces and shift focus between windows. Space drops back to base.
 - **Combos**: momentary layer access on both hands, Shift+Enter on the inner thumbs, Alt+Tab on A + thumb.
 - **ZMK Studio** support on the right half for runtime keymap experiments.
 
@@ -31,7 +32,7 @@ Rendered by [keymap-drawer](https://github.com/caksoylar/keymap-drawer); regener
 | 2 | Media/Win | Volume, page up/down, macOS Spaces switching, window manager chords |
 | 3 | System | ZMK Studio unlock, Bluetooth profile select/clear |
 | 4 | Mouse | Auto-activated by the right trackball; clicks, mod-clicks, screenshot |
-| 5 | NumPad | Smart numpad targeted by numword; operators on the left home row |
+| 5 | NumPad | Smart numpad targeted by numword; operators on the left home row; trackballs do Amethyst window management |
 
 ## Hardware
 
