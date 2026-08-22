@@ -2,6 +2,7 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <behaviors/num_word.dtsi>   // urob/zmk-auto-layer module
 
 /* Key position groups for timeless homerow mods (36-key numbering)
  *  0  1  2  3  4    5  6  7  8  9
@@ -41,6 +42,14 @@
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <KEYS_L THUMBS>;
             hold-trigger-on-release;
+        };
+
+        td_num: tap_dance_num {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_NUM";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&num_word 1>, <&to 1>;   // tap: smart num, double tap: lock layer 1
         };
 
         as_ht: autoshift_hold_tap {
@@ -138,7 +147,7 @@
 &lt 3 Q  &as W               &as E           &as R           &as T             &as Y               &as U            &as I               &as O                &as P
 &as A    &hml LEFT_CONTROL S  &hml LEFT_ALT D  &hml LEFT_GUI F  &hml LEFT_SHIFT G  &hmr RIGHT_SHIFT H   &hmr RIGHT_GUI J  &hmr RIGHT_ALT K     &hmr RIGHT_CONTROL L  &kp BACKSPACE
 &as Z    &as X               &as C           &as V           &as B             &as N               &as M            &as COMMA           &as DOT              &as FSLH
-                             &kp ESCAPE      &as APOS        &mt F5 SPACE      &mt LEFT_ALT ENTER  &to 1            &mt LEFT_SHIFT TAB
+                             &kp ESCAPE      &as APOS        &mt F5 SPACE      &mt LEFT_ALT ENTER  &td_num          &mt LEFT_SHIFT TAB
             >;
         };
 

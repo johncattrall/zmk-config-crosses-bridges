@@ -8,6 +8,8 @@ manifest:
       url-base: https://github.com/Good-Great-Grand-Wonderful
     - name: johncattrall
       url-base: https://github.com/johncattrall
+    - name: urob
+      url-base: https://github.com/urob
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -16,5 +18,8 @@ manifest:
       remote: johncattrall
       revision: main
       import: config/west.yml
+    - name: zmk-auto-layer
+      remote: urob
+      revision: v0.3
   self:
     path: config
