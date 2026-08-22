@@ -221,7 +221,7 @@ layers:
   - {t: ▽, type: trans}
   - Sft+Alt+Enter
   - Sft+Alt+M
-  - Gui+Sft+Alt+Space
+  - Meh+Space
 combos:
 - p: [24, 32]
   k: Nav/Num
