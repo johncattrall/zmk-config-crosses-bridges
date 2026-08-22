@@ -3,6 +3,7 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <behaviors/num_word.dtsi>   // urob/zmk-auto-layer module
+#include <scroll-snap.dtsi>          // kot149/zmk-scroll-snap module
 
 /* Key position groups for timeless homerow mods (36-key numbering)
  *  0  1  2  3  4    5  6  7  8  9
@@ -205,5 +206,31 @@
                   &trans     &to 0      &trans     &trans     &trans  &trans
             >;
         };
+    };
+};
+
+/* Left trackball, per-layer behavior.
+ * The peripheral now sends raw x/y (only BLE rate limiting on-half);
+ * interpretation happens here on the central side so it can vary by layer:
+ *   - Mouse layer (4): precision pointer at half speed for fine placement
+ *   - everywhere else: vertical + horizontal scroll, snapped to the
+ *     dominant axis by zmk-scroll-snap so diagonal wobble does not leak
+ *     into the other axis
+ */
+&trackball_peripheral_split {
+    input-processors = <&zip_ble_report_rate_limit>;
+};
+
+&trackball_peripheral_listener {
+    status = "okay";
+
+    precision_pointer {
+        layers = <4>;
+        input-processors = <&zip_xy_scaler 1 2>;
+    };
+
+    scroller {
+        layers = <0 1 2 3 5>;
+        input-processors = <&zip_xy_to_scroll_mapper>, <&zip_scroll_snap>, <&zip_scroll_scaler 1 2>;
     };
 };

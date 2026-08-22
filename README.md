@@ -17,7 +17,7 @@ Rendered by [keymap-drawer](https://github.com/caksoylar/keymap-drawer); regener
 - **Timeless home row mods** ([urob-style](https://github.com/urob/zmk-config)): balanced flavor, 280 ms tapping term, `require-prior-idle-ms`, and positional hold triggers, so mods never misfire during fast rolls. Mac-ordered: Cmd on the index fingers where it belongs.
 - **Autoshift alphas**: hold any letter or number for its shifted character, no Shift key needed for capitals.
 - **Smart numpad (numword)**: tap the right inner thumb and the right half becomes a physical-style numpad (789 / 456 / 123) that switches itself off after the number, via [zmk-auto-layer](https://github.com/urob/zmk-auto-layer). Double tap locks the pad for data entry, triple tap locks the Nav/Num layer.
-- **Dual trackballs**: right ball is the pointer (auto-activates the Mouse layer on movement), left ball scrolls.
+- **Dual trackballs**: right ball is the pointer (auto-activates the Mouse layer on movement). The left ball is layer-aware: scroll on every layer (vertical and horizontal, axis-snapped by [zmk-scroll-snap](https://github.com/kot149/zmk-scroll-snap)), precision pointer at half speed on the Mouse layer for fine placement.
 - **Mouse layer with mod-clicks**: clicks mirrored on both hands, home row mods stay live for Cmd-click, Shift-click and friends.
 - **Combos**: momentary layer access on both hands, Shift+Enter on the inner thumbs, Alt+Tab on A + thumb.
 - **ZMK Studio** support on the right half for runtime keymap experiments.
@@ -48,13 +48,13 @@ Rendered by [keymap-drawer](https://github.com/caksoylar/keymap-drawer); regener
 | Ball | Half | Role | Notes |
 |------|------|------|-------|
 | Right | central | Pointer | CPI 400, jumps to Mouse layer on movement (`automouse-layer`) |
-| Left | peripheral | Vertical scroll | CPI 200, scroll mapping applied on-half before BLE |
+| Left | peripheral | Layer-aware | CPI 200, raw motion sent to central; scroll (v+h, axis-snapped) everywhere, precision pointer on the Mouse layer |
 
 Driver: [efogdev/zmk-pmw3610-driver](https://github.com/efogdev/zmk-pmw3610-driver) with anti-warp and BLE report rate limiting.
 
 ## Module tree
 
-This repo (keymap + pin overrides) imports [johncattrall/gggw-zmk-keebs](https://github.com/johncattrall/gggw-zmk-keebs) (shield definition), which pulls in ZMK v0.3, the PMW3610 driver, report rate limiting, and input processors. [urob/zmk-auto-layer](https://github.com/urob/zmk-auto-layer) provides numword.
+This repo (keymap + pin overrides) imports [johncattrall/gggw-zmk-keebs](https://github.com/johncattrall/gggw-zmk-keebs) (shield definition), which pulls in ZMK v0.3, the PMW3610 driver, report rate limiting, and input processors. [urob/zmk-auto-layer](https://github.com/urob/zmk-auto-layer) provides numword and [kot149/zmk-scroll-snap](https://github.com/kot149/zmk-scroll-snap) provides axis-snapped scrolling.
 
 ## Building
 

@@ -10,6 +10,8 @@ manifest:
       url-base: https://github.com/johncattrall
     - name: urob
       url-base: https://github.com/urob
+    - name: kot149
+      url-base: https://github.com/kot149
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -21,5 +23,8 @@ manifest:
     - name: zmk-auto-layer
       remote: urob
       revision: v0.3
+    - name: zmk-scroll-snap
+      remote: kot149
+      revision: v1
   self:
     path: config
