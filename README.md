@@ -14,6 +14,10 @@ Rendered by [keymap-drawer](https://github.com/caksoylar/keymap-drawer); regener
 
 ![Base layer](keymap-drawer/crosses_base.svg)
 
+#### Graphite (toggle)
+
+![Graphite layer](keymap-drawer/crosses_graphite.svg)
+
 #### Nav/Num
 
 ![Nav/Num layer](keymap-drawer/crosses_nav-num.svg)
@@ -44,6 +48,7 @@ Rendered by [keymap-drawer](https://github.com/caksoylar/keymap-drawer); regener
 - **Trackball window management** ([Amethyst](https://ianyh.com/amethyst/)): on the NumPad layer the balls become window controls via [zmk-input-processor-keybind](https://github.com/zettaface/zmk-input-processor-keybind). Left-ball flicks throw the focused window to the space left/right or swap it through the stack; right-ball flicks move between spaces and shift focus between windows. Space drops back to base.
 - **Combos**: momentary layer access on both hands, Shift+Enter on the inner thumbs, Alt+Tab on A + thumb.
 - **ZMK Studio** support on the right half for runtime keymap experiments.
+- **Graphite toggle**: a full [Graphite](https://github.com/rdavison/graphite-layout) alpha layer, one key to switch (System layer). Home row mods stay on the same fingers, autoshift carries over, and Graphite's custom shift pairs (' _, . >, - ", / <, , ?) are implemented with mod-morphs. Layer locks use toggles so switching layouts never resets them.
 - **Travel soft off**: hold the power-off key on the System layer for 2 s and both halves shut down completely (a few microamps). Keys cannot wake it; tap each half's reset button to power back on.
 
 ## Layers
@@ -51,11 +56,12 @@ Rendered by [keymap-drawer](https://github.com/caksoylar/keymap-drawer); regener
 | # | Name | Purpose |
 |---|------|---------|
 | 0 | Base | QWERTY, autoshift, home row mods, F5 (voice input) on Space hold |
-| 1 | Nav/Num | Number row with autoshifted symbols, vim-order arrows on the right home row, brackets |
-| 2 | Media/Win | Volume, page up/down, macOS Spaces switching, window manager chords |
-| 3 | System | Soft off (travel), bootloader and reset per half, USB/BT output toggle, Bluetooth profiles, Studio unlock |
-| 4 | Mouse | Auto-activated by the right trackball; clicks, mod-clicks, screenshot |
-| 5 | NumPad | Smart numpad targeted by numword; operators on the left home row; trackballs do Amethyst window management |
+| 1 | Graphite | Toggled alternate alpha layout (System layer key); HRM carried over positionally, custom Graphite shift pairs via mod-morphs, comma and Backspace on the left thumbs |
+| 2 | Nav/Num | Number row with autoshifted symbols, vim-order arrows on the right home row, brackets |
+| 3 | Media/Win | Volume, page up/down, macOS Spaces switching, window manager chords |
+| 4 | System | Soft off (travel), bootloader and reset per half, USB/BT output toggle, Bluetooth profiles, Graphite toggle, Studio unlock |
+| 5 | Mouse | Auto-activated by either trackball; clicks, mod-clicks, screenshot |
+| 6 | NumPad | Smart numpad targeted by numword; operators on the left home row; trackballs do Amethyst window management |
 
 ## Hardware
 

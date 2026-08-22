@@ -49,6 +49,11 @@ parse_config:
   raw_binding_map:
     # smart numpad thumb: tap = num_word, double tap = numpad lock, triple = layer 1 lock
     "&td_num": {t: "NumWord", s: "2x Lock"}
+    "&gr_apos UNDER 0": {t: "'", s: "_"}
+    "&gr_dot GT 0": {t: ".", s: ">"}
+    "&gr_dash DQT 0": {t: "-", s: "\""}
+    "&gr_slash LT 0": {t: "/", s: "<"}
+    "&gr_comma QMARK 0": {t: ",", s: "?"}
     "&studio_unlock": "Studio unlock"
     "&soft_off": {t: "Power Off", h: "hold 2s"}
     "&bootloader": "Bootloader"

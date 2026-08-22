@@ -16,6 +16,17 @@
 #define KEYS_R 5 6 7 8 9 15 16 17 18 19 25 26 27 28 29
 #define THUMBS 30 31 32 33 34 35
 
+/* Layer names. Graphite sits at index 1, directly above Base, so every
+ * function layer still overrides it (highest active layer wins).
+ */
+#define L_BASE     0
+#define L_GRAPHITE 1
+#define L_NAV      2
+#define L_MEDIA    3
+#define L_SYS      4
+#define L_MOUSE    5
+#define L_NUM      6
+
 / {
     chosen { zmk,physical-layout = &gggw_crosses_36_layout; };
 
@@ -51,8 +62,24 @@
             label = "TAP_DANCE_NUM";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&num_word 5>, <&to 5>, <&to 1>;   // tap: smart numpad, double tap: lock numpad, triple tap: lock layer 1
+            bindings = <&num_word L_NUM>, <&tog L_NUM>, <&tog L_NAV>;   // tap: smart numpad, double tap: toggle numpad lock, triple tap: toggle nav lock
         };
+
+        /* Graphite custom shift pairs: a mod-morph makes real Shift produce
+         * the Graphite pair, and a wrapping hold-tap keeps the autoshift feel
+         * (hold types the pair character). One morph + one hold-tap per key.
+         */
+        gr_apos: gr_apos { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&apos_mm>; };
+        gr_dot: gr_dot { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&dot_mm>; };
+        gr_dash: gr_dash { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&dash_mm>; };
+        gr_slash: gr_slash { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&slash_mm>; };
+        gr_comma: gr_comma { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&comma_mm>; };
+
+        apos_mm: apos_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp SQT>, <&kp UNDER>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        dot_mm: dot_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp DOT>, <&kp GT>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        dash_mm: dash_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp MINUS>, <&kp DQT>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        slash_mm: slash_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp FSLH>, <&kp LT>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        comma_mm: comma_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp COMMA>, <&kp QMARK>; mods = <(MOD_LSFT|MOD_RSFT)>; };
 
         as_ht: autoshift_hold_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -113,22 +140,22 @@
         compatible = "zmk,combos";
 
         layer1-combo-left {
-            bindings = <&mo 1>;
+            bindings = <&mo L_NAV>;
             key-positions = <24 32>;
         };
 
         layer2-combo-left {
-            bindings = <&mo 2>;
+            bindings = <&mo L_MEDIA>;
             key-positions = <23 32>;
         };
 
         layer1-combo-right {
-            bindings = <&mo 1>;
+            bindings = <&mo L_NAV>;
             key-positions = <25 33>;
         };
 
         layer2-combo-right {
-            bindings = <&mo 2>;
+            bindings = <&mo L_MEDIA>;
             key-positions = <26 33>;
         };
 
@@ -155,10 +182,26 @@
         layer_0 {
             display-name = "Base";
             bindings = <
-&lt 3 Q  &as W               &as E           &as R           &as T             &as Y               &as U            &as I               &as O                &as P
+&lt L_SYS Q  &as W               &as E           &as R           &as T             &as Y               &as U            &as I               &as O                &as P
 &as A    &hml LEFT_CONTROL S  &hml LEFT_ALT D  &hml LEFT_GUI F  &hml LEFT_SHIFT G  &hmr RIGHT_SHIFT H   &hmr RIGHT_GUI J  &hmr RIGHT_ALT K     &hmr RIGHT_CONTROL L  &kp BACKSPACE
 &as Z    &as X               &as C           &as V           &as B             &as N               &as M            &as COMMA           &as DOT              &as FSLH
                              &kp ESCAPE      &as APOS        &mt F5 SPACE      &mt LEFT_ALT ENTER  &td_num          &mt LEFT_SHIFT TAB
+            >;
+        };
+
+
+        graphite {
+            // Toggled alpha layer (System layer key). Sits directly above
+            // Base so all function layers still win. HRM mods carried over
+            // positionally; custom Graphite shift pairs via gr_* behaviors.
+            // Comma takes the Esc thumb (Esc lives on Nav), Backspace takes
+            // the freed quote thumb; i sits on the old Backspace position.
+            display-name = "Graphite";
+            bindings = <
+&lt L_SYS B  &as L                &as D            &as W            &as Z              &gr_apos UNDER 0     &as F             &as O             &as U                 &as J
+&as N        &hml LEFT_CONTROL R  &hml LEFT_ALT T  &hml LEFT_GUI S  &hml LEFT_SHIFT G  &hmr RIGHT_SHIFT Y   &hmr RIGHT_GUI H  &hmr RIGHT_ALT A  &hmr RIGHT_CONTROL E  &as I
+&as Q        &as X                &as M            &as C            &as V              &as K                &as P             &gr_dot GT 0      &gr_dash DQT 0        &gr_slash LT 0
+                                  &gr_comma QMARK 0  &kp BSPC       &trans             &trans               &trans            &trans
             >;
         };
 
@@ -168,7 +211,7 @@
 &as NUMBER_1  &as NUMBER_2  &as NUMBER_3   &as NUMBER_4  &as NUMBER_5  &as NUMBER_6    &as N7            &as N8             &as NUMBER_9     &as NUMBER_0
 &kp ESCAPE    &trans        &trans         &trans        &trans        &kp LEFT_ARROW  &kp DOWN_ARROW    &kp UP_ARROW       &kp RIGHT_ARROW  &as SEMICOLON
 &as GRAVE     &kp LCTRL     &kp LEFT_ALT   &kp CAPS      &kp TAB       &as MINUS       &as LEFT_BRACKET  &as RIGHT_BRACKET  &as SQT          &as BACKSLASH
-                            &kp BACKSPACE  &to 0         &kp SPACE     &kp ENTER       &to 2             &kp SPACE
+                            &kp BACKSPACE  &tog L_NAV    &kp SPACE     &kp ENTER       &tog L_MEDIA      &kp SPACE
             >;
         };
 
@@ -178,7 +221,7 @@
 &kp K_MUTE    &none           &none           &mkp RCLK        &mkp LCLK      &kp LC(LEFT)        &kp LC(RIGHT)       &kp RA(RS(RC(LEFT)))  &kp RS(RA(RC(RIGHT)))  &none
 &kp C_VOL_UP  &none           &kp UP_ARROW    &none            &kp PAGE_UP    &shifted LA(H)      &shifted LA(L)      &shifted LA(K)        &shifted LA(J)         &none
 &kp C_VOL_DN  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp PAGE_DOWN  &kp EQUAL           &kp RBKT            &kp RS(RA(RC(H)))     &kp RS(RA(RC(L)))      &kp SLASH
-                              &none           &to 0            &none          &shifted LA(SPACE)  &shifted LA(ENTER)  &kp SPACE
+                              &none           &tog L_MEDIA     &none          &shifted LA(SPACE)  &shifted LA(ENTER)  &kp SPACE
             >;
         };
 
@@ -187,7 +230,7 @@
             // bootloader/sys_reset act on the half whose key is pressed.
             display-name = "System";
             bindings = <
-&none          &studio_unlock  &none  &none  &bootloader  &bootloader  &none          &none         &none         &soft_off
+&none          &studio_unlock  &tog L_GRAPHITE  &none  &bootloader  &bootloader  &none          &none         &none         &soft_off
 &out OUT_TOG   &none           &none  &none  &sys_reset   &bt BT_CLR   &bt BT_SEL 0   &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3
 &soft_off      &none           &none  &none  &none        &bt BT_SEL 4 &bt BT_DISC 0  &none         &none         &sys_reset
                                &none  &none  &none        &none        &none          &kp SPACE
@@ -200,7 +243,7 @@
 &kp LG(TAB)  &none  &mkp MB4  &mkp MB5  &none                 &mkp MB1         &mkp MB2       &none          &none              &kp LS(LG(TAB))
 &kp ESC      &none  &mkp MB2  &mkp MB1  &kp LS(LG(NUMBER_4))  &kp RIGHT_SHIFT  &kp RIGHT_GUI  &kp RIGHT_ALT  &kp RIGHT_CONTROL  &none
 &none        &none  &none     &none     &none                 &trans           &trans         &none          &trans             &none
-                    &none     &trans    &to 0                 &trans           &trans         &none
+                    &none     &trans    &tog L_MOUSE          &trans           &trans         &none
             >;
         };
 
@@ -219,7 +262,7 @@
 &trans  &trans    &trans     &trans     &trans     &kp COMMA  &kp N7  &kp N8  &kp N9  &kp BACKSPACE
 &trans  &kp PLUS  &kp MINUS  &kp ASTRK  &kp FSLH   &kp N0     &kp N4  &kp N5  &kp N6  &kp ENTER
 &trans  &trans    &trans     &trans     &trans     &kp DOT    &kp N1  &kp N2  &kp N3  &kp EQUAL
-                  &kp RS(RA(RC(T)))  &to 0  &trans     &kp LS(LA(ENTER))  &kp LS(LA(M))  &kp LS(LC(LA(SPACE)))
+                  &kp RS(RA(RC(T)))  &tog L_NUM  &trans     &kp LS(LA(ENTER))  &kp LS(LA(M))  &kp LS(LC(LA(SPACE)))
             >;
         };
     };
@@ -292,15 +335,15 @@
      * first matching child wins. Window management must beat precision.
      */
     win_throw {
-        layers = <5>;
+        layers = <L_NUM>;
         input-processors = <&zip_win_throw>, <&zip_xy_scaler 0 1>;
     };
 
     precision_pointer {
-        layers = <4>;
+        layers = <L_MOUSE>;
         // scaler slows the pointer; temp_layer refreshes the Mouse layer
         // timeout so left-ball motion keeps the layer alive too
-        input-processors = <&zip_xy_scaler 3 4>, <&zip_temp_layer 4 800>;
+        input-processors = <&zip_xy_scaler 3 4>, <&zip_temp_layer L_MOUSE 800>;
     };
 };
 
@@ -308,15 +351,15 @@
 // The zero scaler stops residual motion from moving the pointer.
 &trackball_central_listener {
     win_resize {
-        layers = <5>;
+        layers = <L_NUM>;
         input-processors = <&zip_win_resize>, <&zip_xy_scaler 0 1>;
     };
 };
 
 /* Mouse layer keys must not dismiss the temp layer: exclude the click,
  * mod-click and shortcut positions so you can click while the layer is
- * held open by ball motion. Position 32 (&to 0) stays excluded from this
- * list on purpose: it is the explicit exit.
+ * held open by ball motion. The Mouse layer's exit key (position 32,
+ * &tog L_MOUSE) stays excluded from this list on purpose.
  */
 &zip_temp_layer {
     require-prior-idle-ms = <150>;
