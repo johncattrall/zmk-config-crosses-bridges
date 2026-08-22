@@ -49,7 +49,7 @@
             label = "TAP_DANCE_NUM";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&num_word 1>, <&to 1>;   // tap: smart num, double tap: lock layer 1
+            bindings = <&num_word 5>, <&to 5>, <&to 1>;   // tap: smart numpad, double tap: lock numpad, triple tap: lock layer 1
         };
 
         as_ht: autoshift_hold_tap {
@@ -187,12 +187,16 @@
             >;
         };
 
-        layer_5 {
+        numpad {
+            // Right half is a numpad (456 on home row, like a physical pad).
+            // Left half stays transparent except an operator cluster on the home row,
+            // so left-hand letters fall through to base and end num_word naturally.
+            // Index 5: num_word and td_num point here.
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans    &trans     &trans     &trans     &kp COMMA  &kp N7  &kp N8  &kp N9  &kp BACKSPACE
+&trans  &kp PLUS  &kp MINUS  &kp ASTRK  &kp FSLH   &kp N0     &kp N4  &kp N5  &kp N6  &kp ENTER
+&trans  &trans    &trans     &trans     &trans     &kp DOT    &kp N1  &kp N2  &kp N3  &kp EQUAL
+                  &trans     &to 0      &trans     &trans     &trans  &trans
             >;
         };
     };
