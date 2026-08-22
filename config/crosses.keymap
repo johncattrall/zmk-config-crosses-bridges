@@ -65,10 +65,23 @@
             bindings = <&num_word L_NUM>, <&tog L_NUM>, <&tog L_NAV>;   // tap: smart numpad, double tap: toggle numpad lock, triple tap: toggle nav lock
         };
 
-        /* BISECT TEST 1: gr_* pair behaviors removed; plain autoshift on
-         * the Graphite punctuation keys. If the left half survives this build,
-         * the pair behaviors were the peripheral killer.
+        /* Graphite custom shift pairs: tap = mod-morph (base char, shifted pair
+         * when shift held), hold = autoshift to the pair char. Cleared of
+         * suspicion by the 2026-08-22 bisect; the real failures were the
+         * zip_temp_layer driver plus stale ZMK Studio layer-order state.
          */
+        gr_apos: gr_apos { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&apos_mm>; };
+        gr_dot: gr_dot { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&dot_mm>; };
+        gr_dash: gr_dash { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&dash_mm>; };
+        gr_slash: gr_slash { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&slash_mm>; };
+        gr_comma: gr_comma { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&comma_mm>; };
+
+        apos_mm: apos_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp SQT>, <&kp UNDER>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        dot_mm: dot_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp DOT>, <&kp GT>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        dash_mm: dash_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp MINUS>, <&kp DQT>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        slash_mm: slash_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp FSLH>, <&kp LT>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        comma_mm: comma_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp COMMA>, <&kp QMARK>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+
         as_ht: autoshift_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             label = "AUTOSHIFT_HOLD_TAP";
@@ -186,10 +199,10 @@
             // the freed quote thumb; i sits on the old Backspace position.
             display-name = "Graphite";
             bindings = <
-&lt L_SYS B  &as L                &as D            &as W            &as Z              &as SQT            &as F             &as O             &as U                 &as J
+&lt L_SYS B  &as L                &as D            &as W            &as Z              &gr_apos UNDER 0            &as F             &as O             &as U                 &as J
 &as N        &hml LEFT_CONTROL R  &hml LEFT_ALT T  &hml LEFT_GUI S  &hml LEFT_SHIFT G  &hmr RIGHT_SHIFT Y   &hmr RIGHT_GUI H  &hmr RIGHT_ALT A  &hmr RIGHT_CONTROL E  &as I
-&as Q        &as X                &as M            &as C            &as V              &as K                &as P             &as DOT           &as MINUS             &as FSLH      
-                                  &as COMMA          &kp BSPC       &trans             &trans               &trans            &trans
+&as Q        &as X                &as M            &as C            &as V              &as K                &as P             &gr_dot GT 0           &gr_dash DQT 0             &gr_slash LT 0      
+                                  &gr_comma QMARK 0          &kp BSPC       &trans             &trans               &trans            &trans
             >;
         };
 
@@ -338,20 +351,31 @@
 // NumPad layer: right ball resizes the main pane and cycles focus.
 // The zero scaler stops residual motion from moving the pointer.
 &trackball_central_listener {
+    /* This property is also set in the gggw-zmk-keebs module's own
+     * crosses_right.overlay (hardcoded to layer 4), which wins the merge
+     * over the config-dir overlays. The keymap is merged LAST, so this
+     * line is the one that actually takes effect. Layer 4 became the
+     * System layer after the Graphite renumbering; ball motion silently
+     * raising System (bootloader/soft-off/reset keys) caused the entire
+     * 2026-08-22 failure cascade. Keep this override here.
+     */
+    input-processors = <&zip_temp_layer L_MOUSE 800>;
+
     win_resize {
         layers = <L_NUM>;
         input-processors = <&zip_win_resize>, <&zip_xy_scaler 0 1>;
     };
 };
 
-/* Mouse layer keys must not dismiss the temp layer: exclude the click,
- * mod-click and shortcut positions so you can click while the layer is
- * held open by ball motion. The Mouse layer's exit key (position 32,
- * &tog L_MOUSE) stays excluded from this list on purpose.
+/* Automouse via zip_temp_layer, minimal configuration: the layer times out
+ * 800 ms after the last ball motion and is NOT dropped by keypresses, so
+ * clicks and mod-clicks on the Mouse layer just work. excluded-positions is
+ * deliberately NOT set: its position handler in the v0.3 driver interacted
+ * badly with clicks (wedged the central until reset, 2026-08-22 debugging).
+ * require-prior-idle keeps ball jitter from raising the layer mid-typing.
  */
 &zip_temp_layer {
     require-prior-idle-ms = <150>;
-    excluded-positions = <0 2 3 5 6 9 10 12 13 14 15 16 17 18>;
 };
 
 /* Keep num_word alive through window management. Continue-list entries

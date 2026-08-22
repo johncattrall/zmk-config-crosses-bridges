@@ -58,10 +58,15 @@
 };
 
 // Overrides for the input listener node.
-// Mouse layer activation uses ZMK core zip_temp_layer (not driver automouse)
-// so that BOTH balls refresh the timer; see also the left-ball child node in
-// crosses.keymap. Layer 4 stays active until neither ball has moved for 800 ms.
-&trackball_central_listener { status = "okay"; device = <&trackball_central>; input-processors = <&zip_temp_layer 5 800>; /* 5 = Mouse (L_MOUSE); keep in sync with the keymap layer defines */ };
+// WARNING: the input-processors line below is INERT. The gggw-zmk-keebs
+// module's own crosses_right.overlay sets the same property (hardcoded to
+// layer 4) and is merged AFTER this file, so it wins. The override that
+// actually takes effect lives in crosses.keymap, which is merged last of
+// all. This was the root cause of the 2026-08-22 failure cascade: after
+// the Graphite renumbering, the module's hardcoded 4 pointed at the System
+// layer, so ball motion silently armed bootloader/reset/soft-off keys.
+// Rule: verify layer numbers in the compiled build/zephyr/zephyr.dts.
+&trackball_central_listener { status = "okay"; device = <&trackball_central>; input-processors = <&zip_temp_layer 5 800>; /* inert, see warning above */ };
 
 &pro_micro_i2c {
     status = "okay";
