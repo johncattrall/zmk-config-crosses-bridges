@@ -174,17 +174,18 @@ layers:
   - Studio unlock
   - ''
   - ''
+  - Bootloader
+  - Bootloader
   - ''
   - ''
   - ''
+  - t: Power Off
+    h: hold 2s
+  - USB/BT
   - ''
   - ''
   - ''
-  - ''
-  - ''
-  - ''
-  - ''
-  - ''
+  - Reset
   - BT CLR
   - t: BT
     h: '0'
@@ -194,16 +195,19 @@ layers:
     h: '2'
   - t: BT
     h: '3'
+  - t: Power Off
+    h: hold 2s
   - ''
   - ''
   - ''
   - ''
+  - t: BT
+    h: '4'
+  - t: BT DISC
+    h: '0'
   - ''
   - ''
-  - ''
-  - ''
-  - ''
-  - ''
+  - Reset
   - ''
   - ''
   - ''

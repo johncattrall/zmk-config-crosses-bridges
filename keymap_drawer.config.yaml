@@ -50,6 +50,10 @@ parse_config:
     # smart numpad thumb: tap = num_word, double tap = numpad lock, triple = layer 1 lock
     "&td_num": {t: "NumWord", s: "2x Lock"}
     "&studio_unlock": "Studio unlock"
+    "&soft_off": {t: "Power Off", h: "hold 2s"}
+    "&bootloader": "Bootloader"
+    "&sys_reset": "Reset"
+    "&out OUT_TOG": "USB/BT"
     "&mkp LCLK": "L Click"
     "&mkp RCLK": "R Click"
     "&mkp MCLK": "M Click"
@@ -136,4 +140,7 @@ draw_config:
     }
     text.trackball {
       fill: #ffffff;
+      stroke: #7e161f;
+      stroke-width: 2.5;
+      paint-order: stroke;
     }

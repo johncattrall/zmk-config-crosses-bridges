@@ -93,6 +93,14 @@
     };
 };
 
+/* Travel power-off: hold for 2 s to shut both halves down completely
+ * (central forwards to the peripheral first). Wake by tapping the reset
+ * button on each half; keys cannot wake it, so it is safe in a bag.
+ */
+&soft_off {
+    hold-time-ms = <2000>;
+};
+
 &lt {
     tapping-term-ms = <200>;
     flavor = "balanced";
@@ -174,12 +182,14 @@
         };
 
         layer_3 {
+            // Hold Q to reach this layer. soft_off needs a 2 s hold.
+            // bootloader/sys_reset act on the half whose key is pressed.
             display-name = "System";
             bindings = <
-&none  &studio_unlock  &none  &none  &none  &none       &none         &none         &none         &none
-&none  &none           &none  &none  &none  &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3
-&none  &none           &none  &none  &none  &none       &none         &none         &none         &none
-                       &none  &none  &none  &none       &none         &kp SPACE
+&none          &studio_unlock  &none  &none  &bootloader  &bootloader  &none          &none         &none         &soft_off
+&out OUT_TOG   &none           &none  &none  &sys_reset   &bt BT_CLR   &bt BT_SEL 0   &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3
+&soft_off      &none           &none  &none  &none        &bt BT_SEL 4 &bt BT_DISC 0  &none         &none         &sys_reset
+                               &none  &none  &none        &none        &none          &kp SPACE
             >;
         };
 

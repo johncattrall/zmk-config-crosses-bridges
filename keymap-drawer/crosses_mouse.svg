@@ -68,25 +68,25 @@ text.footer {
 }
 
 /* styling for combo tap, and key non-tap label text */
-text.combo, text.hold, text.shifted, text.left, text.right, text.tl, text.tr, text.bl, text.br {
+text.combo, text.hold, text.shifted, text.left, text.right {
     font-size: 11px;
 }
 
-text.hold, text.bl, text.br {
+text.hold {
     text-anchor: middle;
     dominant-baseline: auto;
 }
 
-text.shifted, text.tl, text.tr {
+text.shifted {
     text-anchor: middle;
     dominant-baseline: hanging;
 }
 
-text.left, text.tl, text.bl {
+text.left {
     text-anchor: start;
 }
 
-text.right, text.tr, text.br {
+text.right {
     text-anchor: end;
 }
 
@@ -158,6 +158,9 @@ rect.trackball.side {
 }
 text.trackball {
   fill: #ffffff;
+  stroke: #7e161f;
+  stroke-width: 2.5;
+  paint-order: stroke;
 }
 </style>
 <g transform="translate(30, 0)" class="layer-Mouse">
