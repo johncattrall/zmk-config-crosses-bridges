@@ -112,7 +112,6 @@ draw_config:
   # viewer's prefers-color-scheme so the SVGs stay readable on GitHub dark
   dark_mode: auto
   draw_key_sides: true
-  n_columns: 2
   svg_extra_style: |
     svg.keymap {
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;

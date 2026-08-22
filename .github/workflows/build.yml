@@ -32,11 +32,16 @@ jobs:
                                   'keymap-drawer/crosses.yaml', '-j', 'config/info.json',
                                   '-s', layer], stdout=out, check=True)
               print('drew', layer)
-          # drop fixed dimensions so GitHub renders the SVGs at full column width
+          # double the declared dimensions: GitHub clamps images to the content
+          # column via max-width, so oversizing makes them render at full width
+          pat = re.compile(r'^<svg width="([0-9.]+)" height="([0-9.]+)"')
           for path in glob.glob('keymap-drawer/*.svg'):
               svg = open(path).read()
-              svg = re.sub(r'^<svg width="[0-9.]+" height="[0-9.]+" viewBox', '<svg viewBox', svg)
-              open(path, 'w').write(svg)
+              m = pat.match(svg)
+              if m:
+                  w, h = int(float(m.group(1))) * 2, int(float(m.group(2))) * 2
+                  svg = pat.sub(f'<svg width="{w}" height="{h}"', svg, count=1)
+                  open(path, 'w').write(svg)
           PY
 
       - name: Commit rendered keymaps
