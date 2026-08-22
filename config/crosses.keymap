@@ -260,22 +260,28 @@
 &trackball_peripheral_listener {
     status = "okay";
 
+    /* Base chain = the default for any layer without an override below:
+     * vertical + horizontal scroll, snapped to the dominant axis.
+     * NOTE: never list layer 0 in a child override; layer 0 is always
+     * active in ZMK, so such a child matches on EVERY layer and shadows
+     * the children declared after it.
+     */
+    input-processors = <&zip_xy_to_scroll_mapper>, <&zip_scroll_snap>, <&zip_scroll_scaler 1 2>;
+
+    /* Declared first on purpose: the Mouse layer can still be active
+     * (800 ms temp-layer tail) when the NumPad layer is entered, and the
+     * first matching child wins. Window management must beat precision.
+     */
+    win_throw {
+        layers = <5>;
+        input-processors = <&zip_win_throw>, <&zip_xy_scaler 0 1>;
+    };
+
     precision_pointer {
         layers = <4>;
         // scaler slows the pointer; temp_layer refreshes the Mouse layer
         // timeout so left-ball motion keeps the layer alive too
         input-processors = <&zip_xy_scaler 3 4>, <&zip_temp_layer 4 800>;
-    };
-
-    scroller {
-        layers = <0 1 2 3>;
-        input-processors = <&zip_xy_to_scroll_mapper>, <&zip_scroll_snap>, <&zip_scroll_scaler 1 2>;
-    };
-
-    // NumPad layer: left ball throws/swaps windows (Amethyst)
-    win_throw {
-        layers = <5>;
-        input-processors = <&zip_win_throw>, <&zip_xy_scaler 0 1>;
     };
 };
 
