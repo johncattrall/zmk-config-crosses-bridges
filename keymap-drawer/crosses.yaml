@@ -64,6 +64,63 @@ layers:
     t: Pointer
     h: auto Mouse
     type: trackball
+  Graphite:
+  - t: B
+    h: System
+  - '&as L'
+  - '&as D'
+  - W
+  - Z
+  - t: ''''
+    s: _
+  - '&as F'
+  - O
+  - U
+  - '&as J'
+  - N
+  - t: R
+    h: ⌃
+  - t: T
+    h: ⌥
+  - t: S
+    h: ⌘
+  - t: G
+    h: ⇧
+  - t: Y
+    h: ⇧
+  - t: H
+    h: ⌘
+  - t: A
+    h: ⌥
+  - t: E
+    h: ⌃
+  - I
+  - Q
+  - X
+  - M
+  - C
+  - V
+  - '&as K'
+  - P
+  - t: .
+    s: '>'
+  - t: '-'
+    s: '"'
+  - t: /
+    s: <
+  - t: ','
+    s: '?'
+  - BSPC
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - *id001
+  - *id002
   Nav/Num:
   - t: '1'
     s: '!'
@@ -118,7 +175,7 @@ layers:
   - t: \
     s: '|'
   - Bksp
-  - t: Base
+  - t: Nav/Num
     h: toggle
   - t: Space
     type: held
@@ -161,7 +218,7 @@ layers:
   - Sft+AltGr+Ctl+L
   - /
   - ''
-  - t: Base
+  - t: Media/Win
     h: toggle
   - type: held
   - ⇧⌥ Spc
@@ -172,7 +229,8 @@ layers:
   System:
   - type: held
   - Studio unlock
-  - ''
+  - t: Graphite
+    h: toggle
   - ''
   - Bootloader
   - Bootloader
@@ -253,7 +311,7 @@ layers:
   - ''
   - t: ▽
     type: trans
-  - t: Base
+  - t: Mouse
     h: toggle
   - t: ▽
     type: trans
@@ -308,7 +366,7 @@ layers:
   - '3'
   - '='
   - Sft+AltGr+Ctl+T
-  - t: Base
+  - t: NumPad
     h: toggle
   - t: ▽
     type: trans
