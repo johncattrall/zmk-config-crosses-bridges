@@ -65,22 +65,10 @@
             bindings = <&num_word L_NUM>, <&tog L_NUM>, <&tog L_NAV>;   // tap: smart numpad, double tap: toggle numpad lock, triple tap: toggle nav lock
         };
 
-        /* Graphite custom shift pairs: a mod-morph makes real Shift produce
-         * the Graphite pair, and a wrapping hold-tap keeps the autoshift feel
-         * (hold types the pair character). One morph + one hold-tap per key.
+        /* BISECT TEST 1: gr_* pair behaviors removed; plain autoshift on
+         * the Graphite punctuation keys. If the left half survives this build,
+         * the pair behaviors were the peripheral killer.
          */
-        gr_apos: gr_apos { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&apos_mm>; };
-        gr_dot: gr_dot { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&dot_mm>; };
-        gr_dash: gr_dash { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&dash_mm>; };
-        gr_slash: gr_slash { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&slash_mm>; };
-        gr_comma: gr_comma { compatible = "zmk,behavior-hold-tap"; #binding-cells = <2>; tapping-term-ms = <350>; quick-tap-ms = <0>; flavor = "tap-preferred"; bindings = <&kp>, <&comma_mm>; };
-
-        apos_mm: apos_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp SQT>, <&kp UNDER>; mods = <(MOD_LSFT|MOD_RSFT)>; };
-        dot_mm: dot_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp DOT>, <&kp GT>; mods = <(MOD_LSFT|MOD_RSFT)>; };
-        dash_mm: dash_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp MINUS>, <&kp DQT>; mods = <(MOD_LSFT|MOD_RSFT)>; };
-        slash_mm: slash_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp FSLH>, <&kp LT>; mods = <(MOD_LSFT|MOD_RSFT)>; };
-        comma_mm: comma_mm { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; bindings = <&kp COMMA>, <&kp QMARK>; mods = <(MOD_LSFT|MOD_RSFT)>; };
-
         as_ht: autoshift_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             label = "AUTOSHIFT_HOLD_TAP";
@@ -198,10 +186,10 @@
             // the freed quote thumb; i sits on the old Backspace position.
             display-name = "Graphite";
             bindings = <
-&lt L_SYS B  &as L                &as D            &as W            &as Z              &gr_apos UNDER 0     &as F             &as O             &as U                 &as J
+&lt L_SYS B  &as L                &as D            &as W            &as Z              &as SQT            &as F             &as O             &as U                 &as J
 &as N        &hml LEFT_CONTROL R  &hml LEFT_ALT T  &hml LEFT_GUI S  &hml LEFT_SHIFT G  &hmr RIGHT_SHIFT Y   &hmr RIGHT_GUI H  &hmr RIGHT_ALT A  &hmr RIGHT_CONTROL E  &as I
-&as Q        &as X                &as M            &as C            &as V              &as K                &as P             &gr_dot GT 0      &gr_dash DQT 0        &gr_slash LT 0
-                                  &gr_comma QMARK 0  &kp BSPC       &trans             &trans               &trans            &trans
+&as Q        &as X                &as M            &as C            &as V              &as K                &as P             &as DOT           &as MINUS             &as FSLH      
+                                  &as COMMA          &kp BSPC       &trans             &trans               &trans            &trans
             >;
         };
 
